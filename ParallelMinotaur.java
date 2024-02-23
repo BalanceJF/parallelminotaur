@@ -10,7 +10,7 @@ public class ParallelMinotaur extends Thread {
         Labyrinth labyrinth = new Labyrinth(true); // Cupcake starts as being there
 
         for (int i = 0; i < numVictims; i++) {
-            victims[i] = new Victim(labyrinth, i == 0, 0);
+            victims[i] = new Victim(labyrinth, i == 0, 0, numVictims);
             victims[i].start();
         }
 
@@ -39,7 +39,6 @@ public class ParallelMinotaur extends Thread {
         } else {
             System.out.println("Aw man! We were wrong.");
         }
-        System.out.println(victims[0].getTimesToggled());
     }
 
     public static boolean validateAnswer(Victim[] victims) {
