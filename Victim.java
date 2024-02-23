@@ -9,12 +9,14 @@ public class Victim extends Thread {
     // which is easily doable, but this is way funnier.
     private boolean isHungryHungryHippo;
     private int timesToggled; // Helps keep track of both types of people
+    private int numVictims; // HHH would like to know how many victims there are to count for
 
 
-    public Victim(Labyrinth labyrinth, boolean isHungryHungryHippo, int timesToggled) {
+    public Victim(Labyrinth labyrinth, boolean isHungryHungryHippo, int timesToggled, int numVictims) {
         this.labyrinth = labyrinth;
         this.isHungryHungryHippo = isHungryHungryHippo;
         this.timesToggled = timesToggled;
+        this.numVictims = numVictims;
     }
 
     // Does the labyrinth, returning true if we are ready to pronounce we have found the answer.
@@ -27,7 +29,7 @@ public class Victim extends Thread {
             if (this.labyrinth.getCupcake()) {
                 this.labyrinth.setCupcake(false); // nom
                 this.timesToggled++;
-                return (timesToggled == 99);
+                return (timesToggled == this.numVictims);
             }
         } else {
             if (timesToggled == 0 && !this.labyrinth.getCupcake()) {
@@ -42,5 +44,10 @@ public class Victim extends Thread {
 
     public boolean getVisited() {
         return this.visited;
+    }
+
+    // Debug to make sure my strategy is actually being employed
+    public int getTimesToggled() {
+        return this.timesToggled;
     }
 }
