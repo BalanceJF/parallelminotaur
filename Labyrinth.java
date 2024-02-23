@@ -1,10 +1,8 @@
 public class Labyrinth {
     private boolean cupcake;
-    private int currentVictim;
     
-    public Labyrinth(boolean cupcake, int currentVictim) {
+    public Labyrinth(boolean cupcake) {
         this.cupcake = cupcake;
-        this.currentVictim = currentVictim;
     }
 
     // The problem allows us to eat it or respawn it without eating,
