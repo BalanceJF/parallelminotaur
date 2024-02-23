@@ -18,6 +18,7 @@ public class ParallelMinotaur extends Thread {
 
         ReentrantLock labyrinthLock = new ReentrantLock();
 
+        int numEntries = 0;
         int nextVictim;
         boolean problemFinished = false;
         while (!problemFinished) {
@@ -26,13 +27,14 @@ public class ParallelMinotaur extends Thread {
             if (labyrinthLock.tryLock()) {
                 try {
                     problemFinished = victims[nextVictim].doLabyrinth(labyrinthLock);
+                    numEntries++;
                 } finally {
                     labyrinthLock.unlock();
                 }
             }
         }
 
-        System.out.println("We believe everyone has been in the labyrinth!");
+        System.out.println("We believe everyone has been in the labyrinth! And it only took " + numEntries + " entries.");
 
         if (validateAnswer(victims)) {
             System.out.println("Woohoo! We were right!");
