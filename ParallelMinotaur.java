@@ -27,8 +27,8 @@ public class ParallelMinotaur {
             System.out.println("Victim " + (nextVictim + 1) + " has entered the labyrinth!");
             // Keep the doors nice and locked until the previous person leaves
             if (labyrinthLock.tryLock()) {
+                labyrinthLock.lock();
                 try {
-                    labyrinthLock.lock();
                     problemFinished = victims[nextVictim].doLabyrinth(labyrinthLock);
                     numEntries++;
                 } finally {
