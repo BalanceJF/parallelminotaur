@@ -11,6 +11,7 @@ public class Labyrinth {
         this.cupcake = cupcake;
     }
 
+    // Also known as Using Their Eyes (Hungry Hungry Hippo knows this very well)
     public synchronized boolean getCupcake() {
         return this.cupcake;
     }

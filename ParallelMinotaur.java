@@ -18,12 +18,14 @@ public class ParallelMinotaur {
 
         ReentrantLock labyrinthLock = new ReentrantLock();
 
-        int numEntries = 0;
-        int nextVictim;
+        int numEntries = 0; // Number of times we've had to go in
+        int nextVictim; // >:)
         boolean problemFinished = false;
+        // Let's let people into the labyrinth one by one and see what they do.
         while (!problemFinished) {
             nextVictim = rand.nextInt(numVictims);
             System.out.println("Victim " + (nextVictim + 1) + " has entered the labyrinth!");
+            // Keep the doors nice and locked until the previous person leaves
             if (labyrinthLock.tryLock()) {
                 try {
                     labyrinthLock.lock();
@@ -44,6 +46,7 @@ public class ParallelMinotaur {
         }
     }
 
+    // The victims are very honest about whether they've visited, so we'll check to be 100% sure.
     public static boolean validateAnswer(Victim[] victims) {
         for (int i = 0; i < numVictims; i++) {
             if (!victims[i].getVisited()) {

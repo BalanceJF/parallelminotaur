@@ -8,7 +8,7 @@ public class Victim extends Thread {
     // It may be more logical to flip it and have him replenish all cupcakes,
     // which is easily doable, but this is way funnier.
     private boolean isHungryHungryHippo;
-    private int timesToggled; // Helps keep track of both types of people
+    private int timesToggled; // Both strategies need to know how much they've eaten/replenished.
     private int numVictims; // HHH would like to know how many victims there are to count for
 
 
@@ -24,7 +24,8 @@ public class Victim extends Thread {
 
         this.visited = true;
 
-        // Hungry hungry hippo has his own strategy. We need to now enact it.
+        // Hungry hungry hippo has his own strategy of keeping track
+        // of how many cupcakes he has eaten. We need to now enact it.
         if (this.isHungryHungryHippo) {
             if (this.labyrinth.getCupcake()) {
                 this.labyrinth.setCupcake(false); // nom
@@ -32,6 +33,7 @@ public class Victim extends Thread {
                 return (timesToggled == this.numVictims);
             }
         } else {
+            // Opposite strategy: replenish them cupcakes once
             if (timesToggled == 0 && !this.labyrinth.getCupcake()) {
                 this.labyrinth.setCupcake(true); // help HHH undo nom
             }
