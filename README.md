@@ -31,8 +31,10 @@ For my thread system, I decided to use a reentrant lock from Java libraries sinc
 
 ### Assignment 2:
 Strategies:
-1. Allowing guests to check the viewing room any time would require very little overhead and be much simpler to maintain. However, it would also be unfair, since someone who checked multiple times and for much longer would be just as likely to get in next as someone who randomly decided on a whim to go check. As mentioned, it would also require the guests to go out of their way to specifically check instead of allowing them to easily and quickly know they still can't go.
+1. Allowing guests to check the viewing room any time would require very little overhead and be much simpler to maintain. However, it would also be unfair, since someone who checked multiple times and for much longer would be just as likely to get in next as someone who randomly decided on a whim to go check. As mentioned, it would also require the guests to go out of their way to specifically check instead of allowing them to easily and quickly know they still can't go, meaning there may be some downtime between processes.
 
 2. The strategy of a mark on the room showing if it's available or not solves the problem described for the first strategy involving time spent checking, as guests would know without any guesswork that it's already occupied. It still has the problem of fairness from the first strategy.
 
-3. A strategy of using a queue solves the fairness problem the two other strategies have. Furthermore, it ensures that no single guest is responsible for checking the status of the room themselves, instead being told.
+3. A strategy of using a queue solves the fairness problem the two other strategies have. Furthermore, it ensures that no single guest is responsible for checking the status of the room themselves, instead being told. The main disadvantage of a queue is that it is the highest amount of overhead, with a rigid locking system that could potentially hurt performance for extremely large test cases.
+
+I believe strategy 3 is the best and what I employed in my program. The numbers we are dealing with aren't massive, so overhead isn't as much of an issue as fairness is. I have a queue system that blocks people and only lets the next person know once the previous person is done. Meanwhile, I'm also letting new people enter the line and wait until it's ready for them.
