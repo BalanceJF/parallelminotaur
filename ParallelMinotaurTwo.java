@@ -1,25 +1,31 @@
+import java.lang.reflect.Array;
 import java.util.Random;
-import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class ParallelMinotaurTwo extends Thread {
     private static final int numVictims = 100;
+    private static final int numIterations = 1000; // Number of times people went in and saw the thing
 
     public static void main(String [] args) throws InterruptedException {
-        Victim [] victims = new Victim[numVictims];
+        VictimTwo [] victims = new VictimTwo[numVictims];
 
-        Labyrinth labyrinth = new Labyrinth(true); // Cupcake starts as being there
+        Showroom room = new Showroom(true); // Room starts open
 
         for (int i = 0; i < numVictims; i++) {
-            victims[i] = new Victim(labyrinth, i == 0, 0, numVictims);
+            victims[i] = new VictimTwo(room, false);
             victims[i].start();
         }
 
         Random rand = new Random();
 
-        ReentrantLock labyrinthLock = new ReentrantLock();
+        LinkedBlockingQueue<VictimTwo> victimQueue = new LinkedBlockingQueue<>(MAX_PRIORITY); 
 
-        int numEntries = 0;
-        int nextVictim;
+        for (int i = 0; i < numIterations; i++) {
+            int nextVictim = rand.nextInt(numVictims);
+            victimQueue.put(victims[nextVictim]);
+        }
+
+
         boolean problemFinished = false;
         while (!problemFinished) {
             nextVictim = rand.nextInt(numVictims);
