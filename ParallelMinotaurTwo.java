@@ -1,7 +1,7 @@
 import java.util.Random;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.ArrayBlockingQueue;
 
-public class ParallelMinotaur {
+public class ParallelMinotaurTwo extends Thread {
     private static final int numVictims = 100;
 
     public static void main(String [] args) throws InterruptedException {
