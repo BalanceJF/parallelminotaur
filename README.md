@@ -31,4 +31,8 @@ For my thread system, I decided to use a reentrant lock from Java libraries sinc
 
 ### Assignment 2:
 Strategies:
-1. Allowing guests to check the bathroom any time would require very little overhead and be much simpler to maintain. However, it would also be unfair, since someone who checked multiple times and for much longer would be just as likely to get in next as someone who randomly decided on a whim to go check. 
+1. Allowing guests to check the viewing room any time would require very little overhead and be much simpler to maintain. However, it would also be unfair, since someone who checked multiple times and for much longer would be just as likely to get in next as someone who randomly decided on a whim to go check. As mentioned, it would also require the guests to go out of their way to specifically check instead of allowing them to easily and quickly know they still can't go.
+
+2. The strategy of a mark on the room showing if it's available or not solves the problem described for the first strategy involving time spent checking, as guests would know without any guesswork that it's already occupied. It still has the problem of fairness from the first strategy.
+
+3. A strategy of using a queue solves the fairness problem the two other strategies have. Furthermore, it ensures that no single guest is responsible for checking the status of the room themselves, instead being told.
